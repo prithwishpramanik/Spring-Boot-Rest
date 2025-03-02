@@ -4,10 +4,7 @@ import com.Restapitest.RestapiTest.model.JobPost;
 import com.Restapitest.RestapiTest.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,23 @@ public class JobRestController {
     @GetMapping("JobPost/{postId}")
     public JobPost getjob(@PathVariable int postId){
         return service.getJob(postId);
+    }
+
+    @PostMapping("JobPost")
+    public void addjobs(@RequestBody JobPost jobpost){
+        service.addJob(jobpost);
+    }
+
+    @PutMapping("jobPost")
+    public JobPost updateJob(@RequestBody JobPost jobPost) {
+        service.updateJob(jobPost);
+        return service.getJob(jobPost.getPostId());
+    }
+
+    @DeleteMapping("jobPost/{postId}")
+    public String deleteJob(@PathVariable int postId)
+    {
+        service.deleteJob(postId);
+        return "Deleted";
     }
 }
