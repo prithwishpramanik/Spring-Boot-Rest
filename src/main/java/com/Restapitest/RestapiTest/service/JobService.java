@@ -32,4 +32,7 @@ public class JobService {
     }
 
 
+    public JobPost getJob(int postId) {
+        return repo.getpostID(postId);
+    }
 }
